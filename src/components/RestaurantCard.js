@@ -5,13 +5,13 @@ const RestaurantCard = (props) => {
     <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
       <img
         className="res-logo"
-        src={CON_URL + resData.info.cloudinaryImageId}
+        src={CON_URL + resData.card.card.info.cloudinaryImageId}
         alt="res-logo"
       />
-      <h3>{resData.info.name}</h3>
-      <h4>{resData.info.cuisines.join(",")}</h4>
-      <h4>{resData.info.avgRating} stars</h4>
-      <h4>{resData.info.costForTwo}</h4>
+      <h3>{resData.card.card.info.name}</h3>
+      <h4>{resData.card.card.info.cuisines.join(",")}</h4>
+      <h4>{resData.card.card.info.avgRating} stars</h4>
+      <h4>{resData.card.card.info.costForTwo}</h4>
       {/* <h4>{resData.info.deliveryTime} minutes</h4> */}
     </div>
   );

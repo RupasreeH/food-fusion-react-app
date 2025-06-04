@@ -1,68 +1,70 @@
 import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
-  arr = useState(resList);
-  const [listOfRestaurants, setListOfRestaurants] = arr;
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [filteredRestaurant, setFilterRestaurant] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  console.log("Bodey rendered");
+  useEffect(() => {
+    fectData();
+  }, []);
 
-  //   let ListOfRestaurants = [
-  //     {
-  //       info: {
-  //         id: "18973",
-  //         name: "Nandhana Palace",
-  //         city: "1",
-  //         cloudinaryImageId:
-  //           "RX_THUMBNAIL/IMAGES/VENDOR/2024/11/21/c16228db-0f86-484e-b3b4-2fb707f22b76_18973.jpg",
-  //         locality: "Koramangala",
-  //         areaName: "Koramangala",
-  //         costForTwo: "₹500 for two",
-  //         cuisines: ["Biryani", "Andhra", "South Indian", "North Indian"],
-  //         avgRating: 4.4,
-  //         totalRatingsString: "39K+",
-  //       },
-  //     },
-  //     {
-  //       info: {
-  //         id: "18974",
-  //         name: "Dominos",
-  //         city: "1",
-  //         cloudinaryImageId:
-  //           "RX_THUMBNAIL/IMAGES/VENDOR/2024/11/21/c16228db-0f86-484e-b3b4-2fb707f22b76_18973.jpg",
-  //         locality: "Koramangala",
-  //         areaName: "Koramangala",
-  //         costForTwo: "₹500 for two",
-  //         cuisines: ["Biryani", "Andhra", "South Indian", "North Indian"],
-  //         avgRating: 3.5,
-  //         totalRatingsString: "39K+",
-  //       },
-  //     },
-  //     {
-  //       info: {
-  //         id: "18975",
-  //         name: "Mcd",
-  //         city: "1",
-  //         cloudinaryImageId:
-  //           "RX_THUMBNAIL/IMAGES/VENDOR/2024/11/21/c16228db-0f86-484e-b3b4-2fb707f22b76_18973.jpg",
-  //         locality: "Koramangala",
-  //         areaName: "Koramangala",
-  //         costForTwo: "₹500 for two",
-  //         cuisines: ["Biryani", "Andhra", "South Indian", "North Indian"],
-  //         avgRating: 4.8,
-  //         totalRatingsString: "39K+",
-  //       },
-  //     },
-  //   ];
+  const fectData = async () => {
+    const data = await fetch(
+      "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/search/v3?lat=12.9352403&lng=77.624532&str=Meghana%20Foods&trackingId=7d0790a1-6f5c-4054-1aec-644d35ab52e9&submitAction=ENTER&queryUniqueId=6e5bf510-402a-705e-0afb-d5fdd273b187"
+    );
+    const json = await data.json();
+    // console.log(
+    //   json.data.cards[1].groupedCard.cardGroupMap.RESTAURANT.cards[0].card.card
+    //     .info.id
+    // );
 
-  return (
+    setListOfRestaurants(
+      json.data.cards[1].groupedCard.cardGroupMap.RESTAURANT.cards
+    );
+    setFilterRestaurant(
+      json.data.cards[1].groupedCard.cardGroupMap.RESTAURANT.cards
+    );
+  };
+
+  return listOfRestaurants.length == 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              console.log(searchText);
+              const filteredRestaurant = listOfRestaurants.filter((res) =>
+                res.card.card.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase())
+              );
+              setFilterRestaurant(filteredRestaurant);
+            }}
+          >
+            Search
+          </button>
+        </div>
+
         <button
           className="filter-btn"
           onClick={() => {
             //Filter logic here
             FilteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRating > 4.4
+              (res) => res.card.card.info.avgRating > 4.4
             );
             setListOfRestaurants(FilteredList);
           }}
@@ -71,8 +73,11 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {listOfRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+        {filteredRestaurant.map((restaurant) => (
+          <RestaurantCard
+            key={restaurant.card.card.info.id}
+            resData={restaurant}
+          />
         ))}
       </div>
     </div>
