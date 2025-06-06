@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/RupasreeH/react-recap#readme",
   "devDependencies": {
-    "parcel": "^2.15.2"
+    "parcel": "^2.15.2",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8"
   },
   "browsersList": [
     "last 2 versions"

@@ -2,12 +2,12 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilterRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
-  console.log("Bodey rendered");
+
   useEffect(() => {
     fectData();
   }, []);
@@ -29,6 +29,9 @@ const Body = () => {
       json.data.cards[1].groupedCard.cardGroupMap.RESTAURANT.cards
     );
   };
+
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus == false) return <h1>You are Offline</h1>;
 
   return listOfRestaurants.length == 0 ? (
     <Shimmer />
