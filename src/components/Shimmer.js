@@ -4,6 +4,13 @@ const Shimmer = () => {
       <div className="shimmer-card">Cards</div>
       <div className="shimmer-card">Cards</div>
       <div className="shimmer-card">Cards</div>
+      <div className="shimmer-card">Cards</div>
+      <div className="shimmer-card">Cards</div>
+      <div className="shimmer-card">Cards</div>
+      <div className="shimmer-card">Cards</div>
+      <div className="shimmer-card">Cards</div>
+      <div className="shimmer-card">Cards</div>
+      <div className="shimmer-card">Cards</div>
     </div>
   );
 };
