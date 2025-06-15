@@ -10,3 +10,17 @@ Footer - CopyRight - Links - Address - Contract
 - Slice (cartslice)
 - dispatch(action)
 - Selector
+
+Testing
+
+- Unit Testing
+- Integration Teting
+- End to End Testing
+
+Setting up Testing
+
+- Install React Testing Library
+- Install Jest
+- Install Babel Dependencies
+- Config Jest
+- Config Parcel config file to disbale default babel transpilation
