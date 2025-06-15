@@ -24,3 +24,5 @@ Setting up Testing
 - Install Babel Dependencies
 - Config Jest
 - Config Parcel config file to disbale default babel transpilation
+- Jest Configuration - npx jest-create
+- Install jsdom library
