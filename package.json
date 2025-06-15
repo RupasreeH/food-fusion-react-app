@@ -4,8 +4,8 @@
   "description": "This is React Recap",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html",
-    "test": "jest"
+    "test": "jest",
+    "build": "babel src --out-dir dist"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,11 @@
   },
   "homepage": "https://github.com/RupasreeH/react-recap#readme",
   "devDependencies": {
+    "@babel/cli": "^7.27.2",
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "babel-jest": "^30.0.0",
     "jest": "^30.0.0",
@@ -35,6 +38,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/postcss": "^4.1.8",
+    "identity-obj-proxy": "^3.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",

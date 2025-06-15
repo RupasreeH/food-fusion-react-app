@@ -26,3 +26,6 @@ Setting up Testing
 - Config Parcel config file to disbale default babel transpilation
 - Jest Configuration - npx jest-create
 - Install jsdom library
+- Install @babel/preset-react - to make JSX work in test cases
+- Include @Babel/preset-react inside my babel.config file
+- Install npm install -D @testing-library/jest-dom
